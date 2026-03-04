@@ -1,33 +1,55 @@
-
 name: Multi Platform Workflow
 
 on:
   pull_request:
     branches:
-      - master
+      - main
 
 jobs:
 
   ubuntu-job:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - run: uname -a
-      - run: echo "Hello Ubuntu" > file.txt
-      - run: cat file.txt
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Show OS info
+        run: uname -a
+
+      - name: Create file
+        run: echo "Hello Ubuntu" > file.txt
+
+      - name: Display file
+        run: cat file.txt
 
   windows-job:
     runs-on: windows-latest
     steps:
-      - uses: actions/checkout@v4
-      - run: systeminfo
-      - run: echo Hello Windows > file.txt
-      - run: type file.txt
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Show OS info
+        run: systeminfo
+
+      - name: Create file
+        shell: pwsh
+        run: echo "Hello Windows" > file.txt
+
+      - name: Display file
+        shell: pwsh
+        run: Get-Content file.txt
 
   macos-job:
     runs-on: macos-latest
     steps:
-      - uses: actions/checkout@v4
-      - run: uname -a
-      - run: echo "Hello Mac" > file.txt
-      - run: cat file.txt
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Show OS info
+        run: uname -a
+
+      - name: Create file
+        run: echo "Hello Mac" > file.txt
+
+      - name: Display file
+        run: cat file.txt
